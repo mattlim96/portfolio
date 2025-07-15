@@ -1,11 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',  // Enable static exports
+  output: 'export',
   images: {
-    unoptimized: true, // Required for static export
+    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
-  basePath: '/portfolio', // Your repository name
-  assetPrefix: '/portfolio/', // Your repository name with trailing slash
+  ...(process.env.NODE_ENV === 'production' ? {
+    basePath: '/portfolio',
+    assetPrefix: '/portfolio/',
+  } : {}),
 };
 
 export default nextConfig; 
