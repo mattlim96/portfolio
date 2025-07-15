@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
+  output: 'export',  // Enable static exports
+  images: {
+    unoptimized: true, // Required for static export
+  },
+  basePath: '/portfolio', // Your repository name
+  assetPrefix: '/portfolio/', // Your repository name with trailing slash
 };
 
 export default nextConfig; 
