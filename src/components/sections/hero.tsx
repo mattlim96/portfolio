@@ -20,7 +20,7 @@ export function Hero() {
   return (
     // Use semantic HTML with section tag for better accessibility
     <section className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-gradient-to-br from-background to-muted">
-      <div className="container px-4 py-16 md:py-24">
+      <div className="container px-4 py-16 md:py-24 max-w-4xl mx-auto">
         {/* Grid layout for responsive design */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Content Column */}

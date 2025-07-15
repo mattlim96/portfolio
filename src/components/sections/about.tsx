@@ -5,9 +5,8 @@ import { personalInfo } from '@/data/portfolio'
 
 // Helper function to group skills into categories
 const skillCategories: Record<string, readonly string[]> = {
-  "Languages": ["Python", "R", "SQL", "JavaScript", "TypeScript"],
-  "Web Development": ["React", "Next.js", "HTML", "CSS"],
-  "Data Science": ["Data Science", "Machine Learning", "Statistical Analysis"],
+  "Coding Languages": ["Python", "R", "SQL", "JavaScript", "TypeScript", "React", "Next.js"],
+  "Data Science": ["AI Agents", "LLMs", "NLP", "Object Detection", "Machine Learning", "Statistical Analysis"],
 } as const
 
 export function About() {
@@ -35,7 +34,7 @@ export function About() {
   return (
     <section id="about" className="py-16 md:py-24 bg-muted/50">
       <div className="container px-4">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           {/* Section Header */}
           <div className="space-y-2 mb-12">
             <h2 className="text-3xl font-bold">About Me</h2>
@@ -43,7 +42,7 @@ export function About() {
           </div>
 
           {/* Bio */}
-          <div className="prose prose-lg dark:prose-invert mb-12">
+          <div className="prose dark:prose-invert mb-12">
             <p>{bio}</p>
             <p>
               I'm passionate about leveraging data and technology to solve complex business problems.
@@ -56,7 +55,7 @@ export function About() {
           <div className="space-y-8">
             <h3 className="text-xl font-semibold">Skills & Technologies</h3>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8"> {/*  lg:grid-cols-3 */}
               {Object.entries(groupedSkills).map(([category, categorySkills]) => (
                 <div key={category} className="space-y-4">
                   <h4 className="text-lg font-medium text-primary">{category}</h4>

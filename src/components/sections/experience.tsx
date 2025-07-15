@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { ExternalLink } from 'lucide-react'
+import ReactMarkdown from 'react-markdown'
 import { experiences } from '@/data/portfolio'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 
@@ -16,7 +17,7 @@ export function Experience() {
   return (
     <section id="experience" className="py-16 md:py-24">
       <div className="container px-4">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           {/* Section Header */}
           <div className="space-y-2 mb-12">
             <h2 className="text-3xl font-bold">Experience</h2>
@@ -26,17 +27,19 @@ export function Experience() {
           {/* Experience Tabs */}
           <Tabs defaultValue={sortedExperiences[0].id} className="w-full">
             {/* Company List */}
-            <TabsList className="flex flex-col space-y-2 w-full md:w-auto md:flex-row md:space-y-0 md:space-x-2 bg-transparent">
-              {sortedExperiences.map((exp) => (
-                <TabsTrigger
-                  key={exp.id}
-                  value={exp.id}
-                  className="w-full md:w-auto data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
-                >
-                  {exp.company}
-                </TabsTrigger>
-              ))}
-            </TabsList>
+            <div className="overflow-x-auto pb-2">
+              <TabsList className="flex h-auto space-x-2 bg-transparent">
+                {sortedExperiences.map((exp) => (
+                  <TabsTrigger
+                    key={exp.id}
+                    value={exp.id}
+                    className="min-w-[120px] whitespace-nowrap data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                  >
+                    {exp.company}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </div>
 
             {/* Experience Details */}
             {sortedExperiences.map((exp) => (
@@ -70,10 +73,19 @@ export function Experience() {
                   <p className="text-muted-foreground">{exp.description}</p>
 
                   {/* Achievements */}
-                  <ul className="space-y-2 list-disc list-inside marker:text-primary">
+                  <ul className="space-y-2">
                     {exp.achievements.map((achievement, index) => (
-                      <li key={index} className="text-muted-foreground">
-                        {achievement}
+                      <li key={index} className="text-muted-foreground flex">
+                        <span className="text-primary mr-2">•</span>
+                        <ReactMarkdown
+                          components={{
+                            a: ({ node, ...props }) => (
+                              <a {...props} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline" />
+                            )
+                          }}
+                        >
+                          {achievement}
+                        </ReactMarkdown>
                       </li>
                     ))}
                   </ul>

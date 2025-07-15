@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { ExternalLink } from 'lucide-react'
+import ReactMarkdown from 'react-markdown'
 import { education } from '@/data/portfolio'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 
@@ -16,7 +17,7 @@ export function Education() {
   return (
     <section id="education" className="py-16 md:py-24 bg-muted/50">
       <div className="container px-4">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           {/* Section Header */}
           <div className="space-y-2 mb-12">
             <h2 className="text-3xl font-bold">Education</h2>
@@ -26,17 +27,20 @@ export function Education() {
           {/* Education Tabs */}
           <Tabs defaultValue={sortedEducation[0].id} className="w-full">
             {/* Institution List */}
-            <TabsList className="flex flex-col space-y-2 w-full md:w-auto md:flex-row md:space-y-0 md:space-x-2 bg-transparent">
-              {sortedEducation.map((edu) => (
-                <TabsTrigger
-                  key={edu.id}
-                  value={edu.id}
-                  className="w-full md:w-auto data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
-                >
-                  {edu.institution}
-                </TabsTrigger>
-              ))}
-            </TabsList>
+            <div className="overflow-x-auto pb-2">
+              <TabsList className="flex h-auto space-x-2 bg-transparent">
+                {sortedEducation.map((edu) => (
+                  <TabsTrigger
+                    key={edu.id}
+                    value={edu.id}
+                    className="min-w-[140px] max-w-[200px] truncate data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                    title={edu.institution}
+                  >
+                    {edu.institution}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </div>
 
             {/* Education Details */}
             {sortedEducation.map((edu) => (
@@ -48,13 +52,13 @@ export function Education() {
                 <div className="space-y-6">
                   {/* Degree and Period */}
                   <div>
-                    <h3 className="text-xl font-semibold flex items-center gap-2">
-                      {edu.degree}
+                    <h3 className="text-xl font-semibold flex items-start gap-2">
+                      <span className="break-words">{edu.degree}</span>
                       <a
                         href={edu.website}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-muted-foreground hover:text-primary transition-colors"
+                        className="text-muted-foreground hover:text-primary transition-colors shrink-0 mt-1"
                       >
                         <ExternalLink className="h-4 w-4" />
                         <span className="sr-only">Visit {edu.institution} website</span>
@@ -70,10 +74,19 @@ export function Education() {
 
                   {/* Achievements/Highlights */}
                   {edu.achievements && edu.achievements.length > 0 && (
-                    <ul className="space-y-2 list-disc list-inside marker:text-primary">
+                    <ul className="space-y-2">
                       {edu.achievements.map((achievement, index) => (
-                        <li key={index} className="text-muted-foreground">
-                          {achievement}
+                        <li key={index} className="text-muted-foreground flex">
+                          <span className="text-primary mr-2">•</span>
+                          <ReactMarkdown
+                            components={{
+                              a: ({ node, ...props }) => (
+                                <a {...props} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline" />
+                              )
+                            }}
+                          >
+                            {achievement}
+                          </ReactMarkdown>
                         </li>
                       ))}
                     </ul>

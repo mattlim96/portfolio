@@ -45,7 +45,7 @@ export function Projects() {
             {filteredProjects.map((project) => (
               <div
                 key={project.id}
-                className="group relative bg-card rounded-lg overflow-hidden border transition-all hover:border-primary"
+                className="group relative bg-card rounded-lg overflow-hidden border transition-all hover:border-primary flex flex-col h-full"
               >
                 {/* Project Image */}
                 <div className="aspect-video relative overflow-hidden bg-muted">
@@ -60,40 +60,28 @@ export function Projects() {
                 </div>
 
                 {/* Project Content */}
-                <div className="p-6 space-y-4">
-                  <h3 className="text-xl font-semibold">{project.title}</h3>
-                  <p className="text-muted-foreground">{project.description}</p>
-
-                  {/* Technologies */}
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+                <div className="p-6 flex flex-col flex-grow space-y-4">
+                  <div className="flex-grow space-y-4">
+                    <h3 className="text-xl font-semibold">{project.title}</h3>
+                    <p className="text-muted-foreground">{project.description}</p>
                   </div>
 
-                  {/* Project Links */}
-                  <div className="flex gap-3 pt-2">
-                    <Button
-                      asChild
-                      variant="outline"
-                      size="sm"
-                      className="gap-2"
-                    >
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Github className="h-4 w-4" />
-                        Code
-                      </a>
-                    </Button>
-                    {project.liveUrl && (
+                  {/* Technologies and Links - Bottom Section */}
+                  <div className="space-y-4 mt-auto pt-4">
+                    {/* Technologies */}
+                    <div className="flex flex-wrap gap-2">
+                      {project.technologies.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-2 py-1 bg-accent text-accent-foreground rounded-md text-xs"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Project Links */}
+                    <div className="flex gap-3">
                       <Button
                         asChild
                         variant="outline"
@@ -101,15 +89,32 @@ export function Projects() {
                         className="gap-2"
                       >
                         <a
-                          href={project.liveUrl}
+                          href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          <ExternalLink className="h-4 w-4" />
-                          Live Demo
+                          <Github className="h-4 w-4" />
+                          Code
                         </a>
                       </Button>
-                    )}
+                      {project.liveUrl && (
+                        <Button
+                          asChild
+                          variant="outline"
+                          size="sm"
+                          className="gap-2"
+                        >
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <ExternalLink className="h-4 w-4" />
+                            Live Demo
+                          </a>
+                        </Button>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
