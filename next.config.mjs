@@ -10,10 +10,6 @@ const nextConfig = {
       },
     ],
   },
-  ...(process.env.NODE_ENV === 'production' ? {
-    basePath: '/portfolio',
-    assetPrefix: '/portfolio/',
-  } : {}),
 };
 
 export default nextConfig; 
